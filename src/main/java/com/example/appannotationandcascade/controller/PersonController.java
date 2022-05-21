@@ -9,6 +9,7 @@ import com.example.appannotationandcascade.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class PersonController {
     @Autowired
     AddressRepository addressRepository;
 
+    @Transactional(noRollbackFor = NullPointerException.class)
     @PostMapping
     public HttpEntity<?> addPerson(@RequestBody PersonDto personDto){
 
@@ -44,6 +46,8 @@ public class PersonController {
         }
         person.setAddresses(addresses);
         personRepository.save(person);
+        String var = null;
+        boolean test = var.equals("test");
 //        List<Address> saveAddress = addressRepository.saveAll(addresses);
         return ResponseEntity.ok("saqlandi");
     }
@@ -76,5 +80,19 @@ public class PersonController {
         }catch (Exception e){
             return ResponseEntity.ok("o'chirilmadi");
         }
+    }
+
+
+    @DeleteMapping("/forTransaction/{id}")
+    public HttpEntity<?> deleteForTransactional(@PathVariable Integer id){
+        personRepository.deleteById(id);
+        throw new NullPointerException();
+//        return ResponseEntity.ok("o'chirildi");
+    }
+
+    @GetMapping
+    public List<Person> getPersons(){
+        List<Person> all = personRepository.findAll();
+        return all;
     }
 }

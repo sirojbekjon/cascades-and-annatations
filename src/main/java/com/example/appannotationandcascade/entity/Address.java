@@ -3,6 +3,7 @@ package com.example.appannotationandcascade.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -21,7 +22,7 @@ public class Address {
 
     @Column(nullable = false)
     private String city;
-
+    @JsonIgnore
     @ManyToOne(optional = false,fetch = FetchType.LAZY)
     private Person shaxs;
 

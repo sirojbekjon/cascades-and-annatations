@@ -4,6 +4,7 @@ package com.example.appannotationandcascade.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -21,6 +22,7 @@ public class Client {
     private String fullName;
 
     private String phoneNumber;
+
 
     @OneToOne(mappedBy = "client",cascade = CascadeType.PERSIST)
     private BankAccount bankAccount;

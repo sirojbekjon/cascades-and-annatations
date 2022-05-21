@@ -6,6 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 
-@RepositoryRestResource(path="client")
+//@RepositoryRestResource(path="client")
 public interface ClientRepository extends JpaRepository<Client,Integer> {
 }
